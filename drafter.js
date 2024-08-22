@@ -265,12 +265,26 @@
 	$('#create').click(function() {	
 		$('#create').attr("disabled", false);
   		var players = $("#gameplayers option:selected").index() + 1;
+
+		var playerOne = "Player 1";
+		var playerTwo = "Player 2";
+		var playerThree = "Player 3";
+
+		const names = ["Frenk", "Stijn", "Mike"];
+		names.sort(() => Math.random() - 0.5);
+
+		if (players == 3)
+		{
+			playerOne = names[0];
+			playerTwo = names[1];
+			playerThree = names[2];
+		}
+
   		var rndpicks = $("#picks option:selected").index() + 1;
   		var neededCivs = players * rndpicks;
   		var enabledCivs = 0;
   		var missingCivs = 0;
   		var allowedCivs = [];
-  		var playerPicks = {};
   		
   		//clear any previous results
   		$("#results").empty();
@@ -305,11 +319,23 @@
 
 			$("#results").css("text-align", "left");
 			//loop thru each player
-			for (i = 1; i <= players; i++) { 
-				
-				//add this player to the results HTML
-				picksHTML = picksHTML + "<tr><td>Player " + i + " choose from:</td>";
-				resCopy = resCopy  + "Player " + i + " choose from: - ";
+			for (i = 1; i <= players; i++) { 				
+				var currentPlayerName = "Player " + i;
+				if (i == 1)
+				{
+					currentPlayerName = playerOne;
+				}
+				else if (i == 2)
+				{
+					currentPlayerName = playerTwo;
+				}
+				else if (i == 3)
+				{
+					currentPlayerName = playerThree;
+				}
+
+				picksHTML = picksHTML + "<tr><td>" + currentPlayerName + " choose from:</td>";
+				resCopy = resCopy + currentPlayerName + " choose from: - ";
 				
 				//loop however many picks are needed
 				for (k = 1; k <= rndpicks; k++) {
