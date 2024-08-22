@@ -164,7 +164,7 @@
 	  		});
 					
 	  		//update the title
-	  		totalCivs = 43;
+	  		totalCivs = 42;
 	  		bannedCivs = 0;
 			updateBanned(totalCivs, bannedCivs);
 
@@ -221,7 +221,7 @@
 		  		});
 	
 	        	//update the title
-	        	totalCivs = 43;
+	        	totalCivs = 42;
 		  		bannedCivs = 0;
 				updateBanned(totalCivs, bannedCivs);
 			}
