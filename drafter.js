@@ -335,7 +335,7 @@
 				}
 
 				picksHTML = picksHTML + "<tr><td>" + currentPlayerName + " choose from:</td>";
-				resCopy = resCopy + currentPlayerName + " choose from: - ";
+				resCopy = resCopy + currentPlayerName + " choose from: ";
 				
 				//loop however many picks are needed
 				for (k = 1; k <= rndpicks; k++) {
