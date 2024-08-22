@@ -116,7 +116,7 @@
 	allCivs["Zulu"] = true;
 	
 	var bannedCivs = 0;
-	var totalCivs = 108;
+	var totalCivs = 112;
 	var titleHTML = "";
 	var allclicked = false;
 	
@@ -164,7 +164,7 @@
 	  		});
 					
 	  		//update the title
-	  		totalCivs = 42;
+	  		totalCivs = 43;
 	  		bannedCivs = 0;
 			updateBanned(totalCivs, bannedCivs);
 
@@ -198,7 +198,7 @@
   		});
   		
   		//update the title
-  		totalCivs = 104;
+  		totalCivs = 112;
   		bannedCivs = totalCivs;
 		updateBanned(totalCivs, bannedCivs);
 		
@@ -221,7 +221,7 @@
 		  		});
 	
 	        	//update the title
-	        	totalCivs = 42;
+	        	totalCivs = 43;
 		  		bannedCivs = 0;
 				updateBanned(totalCivs, bannedCivs);
 			}
@@ -244,7 +244,7 @@
 		  		});
 	
 	        	//update the title
-	        	totalCivs = 104;
+	        	totalCivs = 112;
 		  		bannedCivs = 0;
 				updateBanned(totalCivs, bannedCivs);
 			}
@@ -284,7 +284,7 @@
   		});
 		
 		//check if the user is trying to pick more civs than avaliable
-		if (neededCivs > 104) {
+		if (neededCivs > 112) {
 			$("#results").html("<p class='drawerror'>There are not enough civilizations for " + players + " players to have " + rndpicks + " picks each!</br>Select a different number of players or lower the number of random picks and try again!</p>");
 
 		// check if we have enough enabled civs process the draft
