@@ -116,7 +116,7 @@
 	allCivs["Zulu"] = true;
 	
 	var bannedCivs = 0;
-	var totalCivs = 105;
+	var totalCivs = 108;
 	var titleHTML = "";
 	var allclicked = false;
 	
