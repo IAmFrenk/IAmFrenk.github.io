@@ -59,7 +59,7 @@
 	allCivs["Kilwa"] = true;
 	allCivs["Kongo"] = true;
 	allCivs["Korea"] = true;
-	allCivs["Liechtensijn"] = true;
+	allCivs["Liechtenstijn"] = true;
 	allCivs["Lithuania"] = true;
 	allCivs["Macedonian"] = true
 	allCivs["Madagascar"] = true
