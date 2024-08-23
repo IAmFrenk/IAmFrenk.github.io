@@ -146,12 +146,12 @@
 	$('#reset').click(function() {
 	
 		if($('#slideThree').is(':checked')) {
-			$(".America, .Arabia, .Assyria, .Austria, .Aztec, .Babylon, .Brazil, .Byzantium, .Carthage, .Celts, .Chile, .China, .Colombia, .Cuba, .Denmark, .Egypt, .England, .Ethiopia, .France, .Germany, .Greece, .Huns, .Inca, .India, .Indonesia, .Iroquois, .Japan, .Korea, .Maya, .Mongolia, .Morocco, .Netherlands, .Ottomans, .Palmyra, .Persia, .Poland, .Polynesia, .Portugal, .Rome, .Russia, .Shoshone, .Siam, .Songhai, .Spain, .Sweden, .Zulu").css(
+			$(".America, .Arabia, .Assyria, .Austria, .Aztec, .Babylon, .Brazil, .Byzantium, .Carthage, .Celts, .Chile, .China, .Colombia, .Cuba, .Denmark, .Egypt, .England, .Ethiopia, .France, .Germany, .Greece, .Huns, .Inca, .India, .Indonesia, .Iroquois, .Japan, .Korea, .Maya, .Mongolia, .Morocco, .Netherlands, .Ottomans, .Palmyra, .Persia, .Poland, .Polynesia, .Portugal, .Rome, .Russia, .Shoshone, .Siam, .Songhai, .Spain, .Sweden, .Venetian, .Zulu").css(
 			{"text-decoration": "none",
 			"background-color": "#282828"
 			});
 			
-			$(".America, .Arabia, .Assyria, .Austria, .Aztec, .Babylon, .Brazil, .Byzantium, .Carthage, .Celts, .Chile, .China, .Colombia, .Cuba, .Denmark, .Egypt, .England, .Ethiopia, .France, .Germany, .Greece, .Huns, .Inca, .India, .Indonesia, .Iroquois, .Japan, .Korea, .Maya, .Mongolia, .Morocco, .Netherlands, .Ottomans, .Palmyra, .Persia, .Poland, .Polynesia, .Portugal, .Rome, .Russia, .Shoshone, .Siam, .Songhai, .Spain, .Sweden, .Zulu").fadeTo( "slow" , 1, function() {});
+			$(".America, .Arabia, .Assyria, .Austria, .Aztec, .Babylon, .Brazil, .Byzantium, .Carthage, .Celts, .Chile, .China, .Colombia, .Cuba, .Denmark, .Egypt, .England, .Ethiopia, .France, .Germany, .Greece, .Huns, .Inca, .India, .Indonesia, .Iroquois, .Japan, .Korea, .Maya, .Mongolia, .Morocco, .Netherlands, .Ottomans, .Palmyra, .Persia, .Poland, .Polynesia, .Portugal, .Rome, .Russia, .Shoshone, .Siam, .Songhai, .Spain, .Sweden, .Venetian, .Zulu").fadeTo( "slow" , 1, function() {});
 			
 			$.each(allCivs, function (index, value) {
 				if ((index == "Akkad") || (index == "Aksum") || (index == "Argentina") || (index == "Armenia") || (index == "Australia") || (index == "Ayyubids") || (index == "Belgium") || (index == "Boers")  || (index == "Bolivia") || (index == "Brunei") || (index == "Bulgaria") || (index == "Burma") || (index == "Canada") ||  (index == "Chile") ||  (index == "Colombia") ||  (index == "Cuba") ||(index == "Finland") || (index == "Franks") || (index == "Gaul") || (index == "Frenkrijk") || (index == "Liechtenstijn") || (index == "Mikeronesia") || (index == "Georgia") || (index == "Georgia") || (index == "Golden") || (index == "Goths") ||
@@ -164,7 +164,7 @@
 	  		});
 					
 	  		//update the title
-	  		totalCivs = 42;
+	  		totalCivs = 43;
 	  		bannedCivs = 0;
 			updateBanned(totalCivs, bannedCivs);
 
@@ -221,7 +221,7 @@
 		  		});
 	
 	        	//update the title
-	        	totalCivs = 42;
+	        	totalCivs = 43;
 		  		bannedCivs = 0;
 				updateBanned(totalCivs, bannedCivs);
 			}
