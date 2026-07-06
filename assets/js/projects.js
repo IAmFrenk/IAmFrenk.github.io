@@ -1,7 +1,7 @@
 const projects = [
 	{
 		title: "Civ 5 Drafter",
-		description: "Civ 5 Frenkmod Drafter: A Civilization V drafter used for Frenkmod games. Forked from HellBlazer-TV/HellBlazer-TV.github.io, with my own custom civs added: Mikeronesia, Iekeland, Liechtenstijn, and Frenkrijk.",
+		description: "A Civilization V drafter used for multiplayer Frenkmod games. With my own custom civs: Mikeronesia, Liechtenstijn, Iekeland, and Frenkrijk.",
 		href: "projects/civ5-drafter/"
 	},
 ];
