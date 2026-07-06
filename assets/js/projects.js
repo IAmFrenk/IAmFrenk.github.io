@@ -1,11 +1,9 @@
 const projects = [
 	{
 		title: "Civ 5 Drafter",
-		description: "A multiplayer Civilization V drafter with custom civs for Frenkmod sessions.",
+		description: "A multiplayer Civilization V drafter with custom civs for Frenkmod.",
 		href: "projects/civ5-drafter/",
-		status: "Live",
 		icon: "projects/civ5-drafter/img/frenkrijk.png",
-		tags: ["Civ 5", "Drafter", "Frenkmod"],
 	},
 ];
 
@@ -22,13 +20,9 @@ function createProjectCard(project) {
 			<span class="project-icon" aria-hidden="true">
 				<img src="${project.icon}" alt="" />
 			</span>
-			<span class="project-status">${project.status}</span>
 		</div>
 		<h3>${project.title}</h3>
 		<p>${project.description}</p>
-		<div class="project-meta">
-			${project.tags.map((tag) => `<span>${tag}</span>`).join("")}
-		</div>
 	`;
 
 	return card;
