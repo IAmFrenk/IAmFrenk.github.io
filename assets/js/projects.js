@@ -12,6 +12,8 @@ function createProjectCard(project) {
 	const card = document.createElement("a");
 	card.className = "project-card";
 	card.href = project.href;
+	card.target = "_blank";
+	card.rel = "noopener noreferrer";
 	card.setAttribute("aria-label", `Open ${project.title}`);
 
 	card.innerHTML = `
