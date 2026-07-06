@@ -1,64 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Frenk's developer projects and web tools." />
-	<title>Frenk | Developer Projects</title>
-	<link rel="stylesheet" href="assets/css/site.css" />
-	<script src="assets/js/projects.js" defer></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Frenk's developer projects and web tools." />
+    <title>Frenkgoes | Projects</title>
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/projects.js" defer></script>
 </head>
 <body>
-	<header class="site-header">
-		<a class="brand" href="/" aria-label="Frenk home">
-			<span class="brand-mark" aria-hidden="true">F</span>
-			<span>Frenk</span>
-		</a>
-		<nav class="site-nav" aria-label="Primary navigation">
-			<a href="#projects">Projects</a>
-			<a href="https://github.com/IAmFrenk">GitHub</a>
-		</nav>
-	</header>
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <p class="eyebrow">Developer portfolio</p>
+                <h1 id="hero-title">Frenkgoes</h1>
+                <p class="hero-copy">
+                    I build focused web tools, experiments, and small utilities that are useful enough to keep around.
+                </p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#projects">View projects</a>
+                    <a class="button button-secondary" href="https://github.com/IAmFrenk">GitHub</a>
+                </div>
+            </div>
+        </section>
 
-	<main>
-		<section class="hero" aria-labelledby="hero-title">
-			<div class="hero-content">
-				<p class="eyebrow">Developer portfolio</p>
-				<h1 id="hero-title">Frenk</h1>
-				<p class="hero-copy">
-					I build focused web tools, experiments, and small utilities that are useful enough to keep around.
-				</p>
-				<div class="hero-actions">
-					<a class="button button-primary" href="#projects">View projects</a>
-					<a class="button button-secondary" href="https://github.com/IAmFrenk">GitHub</a>
-				</div>
-			</div>
-		</section>
+        <section class="projects-section" id="projects" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <p class="eyebrow">Projects</p>
+                <h2 id="projects-title">Things you can open</h2>
+                <p>
+                    A small collection of web tools, experiments, and utilities that are ready to use.
+                </p>
+            </div>
 
-		<section class="projects-section" id="projects" aria-labelledby="projects-title">
-			<div class="section-heading">
-				<p class="eyebrow">Projects</p>
-				<h2 id="projects-title">Things you can open</h2>
-				<p>
-					A small collection of web tools, experiments, and utilities that are ready to use.
-				</p>
-			</div>
+            <div class="project-grid" id="project-list"></div>
 
-			<div class="project-grid" id="project-list"></div>
+            <noscript>
+                <a class="project-card no-script-card" href="projects/civ5-drafter/">
+                    <span class="project-status">Live</span>
+                    <strong>Civ 5 Drafter</strong>
+                    <span>Open the multiplayer civilization drafter.</span>
+                </a>
+            </noscript>
+        </section>
+    </main>
 
-			<noscript>
-				<a class="project-card no-script-card" href="projects/civ5-drafter/">
-					<span class="project-status">Live</span>
-					<strong>Civ 5 Drafter</strong>
-					<span>Open the multiplayer civilization drafter.</span>
-				</a>
-			</noscript>
-		</section>
-	</main>
-
-	<footer class="site-footer">
-		<span>Built by Frenk</span>
-		<a href="https://github.com/IAmFrenk">github.com/IAmFrenk</a>
-	</footer>
+    <!--<footer class="site-footer">
+        <span>Built by Frenk</span>
+        <a href="https://github.com/IAmFrenk">github.com/IAmFrenk</a>
+    </footer>-->
 </body>
 </html>

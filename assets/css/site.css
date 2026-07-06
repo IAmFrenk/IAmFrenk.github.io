@@ -58,20 +58,6 @@ a {
 	color: inherit;
 }
 
-.site-header {
-	align-items: center;
-	display: flex;
-	justify-content: space-between;
-	left: 0;
-	padding: 22px clamp(20px, 5vw, 72px);
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 2;
-}
-
-.brand,
-.site-nav,
 .hero-actions,
 .project-meta,
 .site-footer {
@@ -79,51 +65,13 @@ a {
 	display: flex;
 }
 
-.brand {
-	font-weight: 750;
-	gap: 10px;
-	text-decoration: none;
-}
-
-.brand-mark {
-	background: var(--accent);
-	border-radius: 8px;
-	color: var(--button-text);
-	display: grid;
-	height: 34px;
-	place-items: center;
-	width: 34px;
-}
-
-.site-nav {
-	gap: 8px;
-}
-
-.site-nav a {
-	border-radius: 999px;
-	color: var(--muted);
-	font-size: 14px;
-	font-weight: 650;
-	padding: 9px 13px;
-	text-decoration: none;
-}
-
-.site-nav a:hover {
-	background: rgba(255, 255, 255, 0.12);
-	color: var(--accent-strong);
-}
-
-.theme-light .site-nav a:hover {
-	background: rgba(255, 255, 255, 0.75);
-}
-
 .hero {
 	background:
 		linear-gradient(135deg, rgba(16, 42, 58, 0.92), rgba(21, 56, 76, 0.72)),
 		rgba(159, 212, 238, 0.5);
 	border-bottom: 1px solid var(--line);
-	min-height: 460px;
-	padding: 126px clamp(20px, 5vw, 72px) 44px;
+	min-height: 420px;
+	padding: 72px clamp(20px, 5vw, 72px) 44px;
 	position: relative;
 }
 
@@ -336,15 +284,14 @@ h1 {
 }
 
 @media (max-width: 700px) {
-	.site-header,
 	.site-footer {
 		align-items: flex-start;
 		flex-direction: column;
 	}
 
 	.hero {
-		min-height: 400px;
-		padding-top: 128px;
+		min-height: 380px;
+		padding-top: 64px;
 	}
 
 	h1 {
@@ -359,7 +306,4 @@ h1 {
 		font-size: 34px;
 	}
 
-	.site-nav {
-		width: 100%;
-	}
 }
