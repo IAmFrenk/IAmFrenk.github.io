@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Type text with Donkey Kong 64 style symbol PNGs and export the result as an image." />
+	<title>Donkey Kong 64 Font Typer | Frenkgoes</title>
+	<link rel="stylesheet" href="styles.css" />
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<main class="page-shell">
+		<nav class="breadcrumbs" aria-label="Breadcrumb">
+			<a href="../../">Frenkgoes</a>
+			<span aria-hidden="true">/</span>
+			<a href="../../#projects">Projects</a>
+			<span aria-hidden="true">/</span>
+			<span>Donkey Kong 64 Font Typer</span>
+		</nav>
+
+		<section class="hero-panel" aria-labelledby="page-title">
+			<div class="logo-placeholder" aria-label="Logo placeholder">
+				<span>Logo</span>
+			</div>
+			<div class="hero-copy">
+				<p class="eyebrow">Browser image tool</p>
+				<h1 id="page-title">Donkey Kong 64 Font Typer</h1>
+				<p>
+					Description placeholder. Replace this with the final text once the logo and project copy are ready.
+				</p>
+			</div>
+		</section>
+
+		<section class="tool-grid" aria-label="Font typer tool">
+			<form class="tool-panel" id="typer-form">
+				<div class="field-group">
+					<label for="text-input">Text</label>
+					<input id="text-input" name="text" type="text" autocomplete="off" placeholder="BANANA" aria-describedby="character-count" />
+					<p class="field-note" id="character-count">0 / 50 characters</p>
+				</div>
+
+				<div class="number-row">
+					<div class="field-group">
+						<label for="letter-spacing-input">Letter gap</label>
+						<input id="letter-spacing-input" name="letterSpacing" type="number" inputmode="numeric" min="0" step="1" value="1" />
+					</div>
+					<div class="field-group">
+						<label for="space-width-input">Space width</label>
+						<input id="space-width-input" name="spaceWidth" type="number" inputmode="numeric" min="0" step="1" value="4" />
+					</div>
+				</div>
+
+				<button class="button-primary" type="submit">Submit</button>
+				<p class="warning" id="warning-message" role="alert" aria-live="polite"></p>
+			</form>
+
+			<section class="preview-panel" aria-labelledby="preview-title">
+				<div class="preview-header">
+					<div>
+						<p class="eyebrow">Preview</p>
+						<h2 id="preview-title">Generated PNG</h2>
+					</div>
+					<button class="button-secondary" id="download-button" type="button" disabled>Download</button>
+				</div>
+				<div class="canvas-wrap">
+					<canvas id="preview-canvas" width="1" height="1" aria-label="Generated text preview"></canvas>
+					<p class="empty-preview" id="empty-preview">Your rendered text will appear here.</p>
+				</div>
+			</section>
+		</section>
+	</main>
+</body>
+</html>

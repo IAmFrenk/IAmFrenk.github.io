@@ -4,6 +4,11 @@ const projects = [
 		description: "A Civilization V drafter used for multiplayer Frenkmod games. With my own custom civs: Mikeronesia, Liechtenstijn, Iekeland, and Frenkrijk.",
 		href: "projects/civ5-drafter/"
 	},
+	{
+		title: "Donkey Kong 64 Font Typer",
+		description: "A browser-based PNG font typer that renders text from DK64-style symbol images and exports the result.",
+		href: "projects/dk64-font-typer/"
+	},
 ];
 
 const projectList = document.querySelector("#project-list");
