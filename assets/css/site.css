@@ -1,11 +1,12 @@
 :root {
-	--page: #9fd4ee;
-	--page-strong: #bde4f6;
+	--page: #163b53;
+	--page-strong: #245770;
 	--surface: #102a3a;
 	--surface-soft: #15384c;
 	--text: #f4fbff;
 	--muted: #b9d9e9;
-	--line: rgba(244, 251, 255, 0.18);
+	--line: rgba(185, 221, 242, 0.18);
+	--grid-line: rgba(100, 166, 206, 0.36);
 	--accent: #bde4f6;
 	--accent-strong: #ffffff;
 	--button-text: #0b2230;
@@ -42,7 +43,7 @@ html {
 
 body {
 	background:
-		linear-gradient(180deg, rgba(8, 32, 48, 0.36), rgba(8, 32, 48, 0.1)),
+		linear-gradient(180deg, rgba(6, 24, 36, 0.58), rgba(6, 24, 36, 0.26)),
 		var(--page);
 	color: var(--text);
 	font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
@@ -67,8 +68,8 @@ a {
 
 .hero {
 	background:
-		linear-gradient(135deg, rgba(16, 42, 58, 0.92), rgba(21, 56, 76, 0.72)),
-		rgba(159, 212, 238, 0.5);
+		linear-gradient(135deg, rgba(10, 31, 45, 0.96), rgba(15, 44, 64, 0.9)),
+		rgba(18, 59, 83, 0.92);
 	border-bottom: 1px solid var(--line);
 	min-height: 420px;
 	padding: 72px clamp(20px, 5vw, 72px) 44px;
@@ -83,8 +84,8 @@ a {
 
 .hero::after {
 	background:
-		linear-gradient(var(--line) 1px, transparent 1px),
-		linear-gradient(90deg, var(--line) 1px, transparent 1px);
+		linear-gradient(var(--grid-line) 1px, transparent 1px),
+		linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
 	background-size: 42px 42px;
 	bottom: 0;
 	content: "";
