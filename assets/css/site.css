@@ -211,22 +211,6 @@ h1 {
 	gap: 14px;
 }
 
-.project-icon {
-	background: var(--surface-soft);
-	border: 1px solid var(--line);
-	border-radius: 8px;
-	display: grid;
-	height: 54px;
-	place-items: center;
-	width: 54px;
-}
-
-.project-icon img {
-	display: block;
-	height: 34px;
-	width: 34px;
-}
-
 .project-card h3 {
 	font-size: 24px;
 	line-height: 1.15;

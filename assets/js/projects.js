@@ -1,9 +1,8 @@
 const projects = [
 	{
 		title: "Civ 5 Drafter",
-		description: "A multiplayer Civilization V drafter with custom civs for Frenkmod.",
-		href: "projects/civ5-drafter/",
-		icon: "projects/civ5-drafter/img/frenkrijk.png",
+		description: "Civ 5 Frenkmod Drafter: A Civilization V drafter used for Frenkmod games. Forked from HellBlazer-TV/HellBlazer-TV.github.io, with my own custom civs added: Mikeronesia, Iekeland, Liechtenstijn, and Frenkrijk.",
+		href: "projects/civ5-drafter/"
 	},
 ];
 
@@ -16,11 +15,6 @@ function createProjectCard(project) {
 	card.setAttribute("aria-label", `Open ${project.title}`);
 
 	card.innerHTML = `
-		<div class="project-topline">
-			<span class="project-icon" aria-hidden="true">
-				<img src="${project.icon}" alt="" />
-			</span>
-		</div>
 		<h3>${project.title}</h3>
 		<p>${project.description}</p>
 	`;
