@@ -204,6 +204,42 @@ input:focus {
 	color: var(--muted);
 }
 
+.allowed-characters {
+	border-top: 1px solid var(--line);
+	color: var(--muted);
+	display: grid;
+	font-size: 13px;
+	gap: 8px;
+	line-height: 1.5;
+	margin-top: 8px;
+	padding-top: 14px;
+}
+
+.allowed-characters p,
+.allowed-characters ul {
+	margin: 0;
+}
+
+.allowed-title {
+	color: var(--accent-strong);
+	font-weight: 800;
+}
+
+.allowed-characters ul {
+	display: grid;
+	gap: 4px 14px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	padding-left: 18px;
+}
+
+code {
+	background: rgba(255, 245, 223, 0.1);
+	border: 1px solid var(--line);
+	border-radius: 5px;
+	color: var(--accent-strong);
+	padding: 1px 5px;
+}
+
 .field-note.is-over-limit {
 	color: var(--danger);
 	font-weight: 800;
@@ -325,5 +361,9 @@ canvas {
 	.preview-header {
 		align-items: flex-start;
 		flex-direction: column;
+	}
+
+	.allowed-characters ul {
+		grid-template-columns: 1fr;
 	}
 }

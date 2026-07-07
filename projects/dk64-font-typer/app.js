@@ -3,19 +3,26 @@ const DEFAULT_LETTER_SPACING = 1;
 const DEFAULT_SPACE_WIDTH = 4;
 
 const SYMBOL_NAME_MAP = {
-	".": "period",
-	",": "comma",
-	"!": "exclamation",
-	"?": "question",
-	":": "colon",
-	";": "semicolon",
-	"-": "hyphen",
-	"_": "underscore",
+	".": "dot",
+	",": ",",
+	"!": "!",
+	"|": "!_reverse",
+	"?": "question_mark",
+	"/": "question_mark_reverse",
+	":": "double_dot",
+	"-": "-",
+	"_": "_",
 	"'": "apostrophe",
-	'"': "quote",
-	"&": "ampersand",
-	"(": "left-paren",
-	")": "right-paren",
+	"&": "and",
+	"%": "percentage",
+	"*": "infinite",
+	"@": "copyright",
+	"#": "button_a",
+	"$": "button_b",
+	"(": "button_l",
+	")": "button_r",
+	"=": "button_z",
+	"+": "button_start",
 };
 
 const form = document.querySelector("#typer-form");
@@ -60,6 +67,7 @@ function symbolCandidates(character) {
 	return unique([
 		safeCharacter && `symbols/${safeCharacter}.png`,
 		namedCharacter && `symbols/${namedCharacter}.png`,
+		character && `symbols/${character}.png`,
 		encodedCharacter !== safeCharacter && `symbols/${encodedCharacter}.png`,
 	]);
 }
