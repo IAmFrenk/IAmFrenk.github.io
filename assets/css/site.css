@@ -234,6 +234,7 @@ h1 {
 .project-meta span {
 	background: var(--page-strong);
 	border-radius: 999px;
+	color: var(--button-text);
 	padding: 6px 10px;
 }
 
