@@ -1,6 +1,6 @@
 const projects = [
 	{
-		title: "Civ 5 Drafter",
+		title: "Frenkmod Drafter",
 		description: "A Civilization V drafter used for multiplayer Frenkmod games. With my own custom civs: Mikeronesia, Liechtenstijn, Iekeland, and Frenkrijk.",
 		href: "projects/civ5-drafter/"
 	},
