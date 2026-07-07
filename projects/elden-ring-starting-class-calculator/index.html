@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Find the optimal Elden Ring starting class for a target stat spread." />
+    <title>Elden Ring Optimal Starting Class Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../../">Frenkgoes</a>
+            <span aria-hidden="true">/</span>
+            <a href="../../#projects">Projects</a>
+            <span aria-hidden="true">/</span>
+            <span>Elden Ring Optimal Starting Class Calculator</span>
+        </nav>
+
+        <section class="calculator-panel" aria-label="Target stats">
+            <form class="stat-form" id="stat-form">
+                <label><span>Vigor</span><input type="number" id="vigor" name="vigor" min="0" max="99" placeholder="0" /></label>
+                <label><span>Mind</span><input type="number" id="mind" name="mind" min="0" max="99" placeholder="0" /></label>
+                <label><span>Endurance</span><input type="number" id="endurance" name="endurance" min="0" max="99" placeholder="0" /></label>
+                <label><span>Strength</span><input type="number" id="strength" name="strength" min="0" max="99" placeholder="0" /></label>
+                <label><span>Dexterity</span><input type="number" id="dexterity" name="dexterity" min="0" max="99" placeholder="0" /></label>
+                <label><span>Intelligence</span><input type="number" id="intelligence" name="intelligence" min="0" max="99" placeholder="0" /></label>
+                <label><span>Faith</span><input type="number" id="faith" name="faith" min="0" max="99" placeholder="0" /></label>
+                <label><span>Arcane</span><input type="number" id="arcane" name="arcane" min="0" max="99" placeholder="0" /></label>
+            </form>
+
+            <button class="button-primary" type="button" id="calcButton">Calculate</button>
+        </section>
+
+        <section class="table-panel" aria-label="Starting class results">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th id="classTh">Class</th>
+                        <th>Level</th>
+                        <th>Vigor</th>
+                        <th>Mind</th>
+                        <th>Endurance</th>
+                        <th>Strength</th>
+                        <th>Dexterity</th>
+                        <th>Intelligence</th>
+                        <th>Faith</th>
+                        <th>Arcane</th>
+                        <th>Minimum level</th>
+                    </tr>
+                </thead>
+                <tbody id="class-results"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        const classes = [
+            { id: "hero", name: "Hero", level: 7, vigor: 14, mind: 9, endurance: 12, strength: 16, dexterity: 9, intelligence: 7, faith: 8, arcane: 11 },
+            { id: "bandit", name: "Bandit", level: 5, vigor: 10, mind: 11, endurance: 10, strength: 9, dexterity: 13, intelligence: 9, faith: 8, arcane: 14 },
+            { id: "astrologer", name: "Astrologer", level: 6, vigor: 9, mind: 15, endurance: 9, strength: 8, dexterity: 12, intelligence: 16, faith: 7, arcane: 9 },
+            { id: "warrior", name: "Warrior", level: 8, vigor: 11, mind: 12, endurance: 11, strength: 10, dexterity: 16, intelligence: 10, faith: 8, arcane: 9 },
+            { id: "prisoner", name: "Prisoner", level: 9, vigor: 11, mind: 12, endurance: 11, strength: 11, dexterity: 14, intelligence: 14, faith: 6, arcane: 9 },
+            { id: "confessor", name: "Confessor", level: 10, vigor: 10, mind: 13, endurance: 10, strength: 12, dexterity: 12, intelligence: 9, faith: 14, arcane: 9 },
+            { id: "wretch", name: "Wretch", level: 1, vigor: 10, mind: 10, endurance: 10, strength: 10, dexterity: 10, intelligence: 10, faith: 10, arcane: 10 },
+            { id: "vagabond", name: "Vagabond", level: 9, vigor: 15, mind: 10, endurance: 11, strength: 14, dexterity: 13, intelligence: 9, faith: 9, arcane: 7 },
+            { id: "prophet", name: "Prophet", level: 7, vigor: 10, mind: 14, endurance: 8, strength: 11, dexterity: 10, intelligence: 7, faith: 16, arcane: 10 },
+            { id: "samurai", name: "Samurai", level: 9, vigor: 12, mind: 11, endurance: 13, strength: 12, dexterity: 15, intelligence: 9, faith: 8, arcane: 8 }
+        ];
+
+        const stats = ["vigor", "mind", "endurance", "strength", "dexterity", "intelligence", "faith", "arcane"];
+        const tbody = document.querySelector("#class-results");
+
+        function targetStat(stat) {
+            const value = Number(document.querySelector(`#${stat}`).value);
+            return Number.isFinite(value) ? value : 0;
+        }
+
+        function minimumLevel(startingClass) {
+            return stats.reduce((level, stat) => {
+                const difference = targetStat(stat) - startingClass[stat];
+                return difference > 0 ? level + difference : level;
+            }, startingClass.level);
+        }
+
+        function renderResults() {
+            const orderedClasses = classes
+                .map((startingClass) => ({ ...startingClass, minimumLevel: minimumLevel(startingClass) }))
+                .sort((a, b) => a.minimumLevel - b.minimumLevel || a.level - b.level || a.name.localeCompare(b.name));
+
+            tbody.innerHTML = orderedClasses.map((startingClass) => `
+                <tr>
+                    <td>
+                        <a class="class-link" href="https://eldenring.wiki.fextralife.com/${startingClass.name}">
+                            <img src="img/${startingClass.id}.png" class="circle-img circle-img--small" alt="${startingClass.name}" />
+                            <span>${startingClass.name}</span>
+                        </a>
+                    </td>
+                    <td>${startingClass.level}</td>
+                    <td>${startingClass.vigor}</td>
+                    <td>${startingClass.mind}</td>
+                    <td>${startingClass.endurance}</td>
+                    <td>${startingClass.strength}</td>
+                    <td>${startingClass.dexterity}</td>
+                    <td>${startingClass.intelligence}</td>
+                    <td>${startingClass.faith}</td>
+                    <td>${startingClass.arcane}</td>
+                    <td>${startingClass.minimumLevel}</td>
+                </tr>
+            `).join("");
+        }
+
+        document.querySelector("#calcButton").addEventListener("click", renderResults);
+        document.querySelector("#stat-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            renderResults();
+        });
+
+        renderResults();
+    </script>
+</body>
+</html>
