@@ -3,21 +3,21 @@ const projects = [
         title: "Donkey Kong 64 Font Typer",
         description: "A browser-based PNG font typer that renders text from DK64-style symbol images and exports the result.",
         href: "projects/dk64-font-typer/",
-        date: "7 July 2026",
+        date: "July 7th, 2026",
         datetime: "2026-07-07"
     },
     {
         title: "Frenkmod Drafter",
         description: "A Civilization V drafter used for multiplayer Frenkmod games. With my own custom civs: Mikeronesia, Liechtenstijn, Iekeland, and Frenkrijk.",
         href: "projects/civ5-drafter/",
-        date: "Sep 1, 2024",
+        date: "September 1st, 2024",
         datetime: "2024-09-01"
     },
     {
         title: "Elden Ring Optimal Starting Class Calculator",
         description: "A calculator that compares Elden Ring starting classes against a target stat spread and ranks them by minimum level.",
         href: "projects/elden-ring-starting-class-calculator/",
-        date: "31 March 2022",
+        date: "March 31st, 2022",
         datetime: "2022-03-31"
     }
 ];
