@@ -2,7 +2,8 @@ const MAX_CHARACTERS = 50;
 const DEFAULT_TEXT = "GOLDEN BANANA";
 const DEFAULT_LETTER_SPACING = 1;
 const DEFAULT_SPACE_WIDTH = 4;
-const DEFAULT_FLYBY_INTERVAL = 6;
+// Average seconds between new background flybys.
+const DEFAULT_FLYBY_INTERVAL = 3;
 const OUTPUT_SCALE = 4;
 const FLYBY_IMAGE_SOURCES = [
 	"flybys/Diddy_icon.png",
@@ -40,7 +41,6 @@ const form = document.querySelector("#typer-form");
 const textInput = document.querySelector("#text-input");
 const letterSpacingInput = document.querySelector("#letter-spacing-input");
 const spaceWidthInput = document.querySelector("#space-width-input");
-const flybyFrequencyInput = document.querySelector("#flyby-frequency-input");
 const characterCount = document.querySelector("#character-count");
 const warningMessage = document.querySelector("#warning-message");
 const previewCanvas = document.querySelector("#preview-canvas");
@@ -68,11 +68,6 @@ function updateCharacterCount() {
 function readPixelInput(input, fallback) {
 	const value = Number.parseInt(input.value, 10);
 	return Number.isFinite(value) ? value : fallback;
-}
-
-function readNumberInput(input, fallback) {
-	const value = Number.parseFloat(input.value);
-	return Number.isFinite(value) && value > 0 ? value : fallback;
 }
 
 function sanitizeFileName(name) {
@@ -190,7 +185,7 @@ function pickRandomFlybyPath(imageWidth, imageHeight) {
 
 function scheduleNextFlyby() {
 	window.clearTimeout(flybyTimer);
-	const intervalSeconds = readNumberInput(flybyFrequencyInput, DEFAULT_FLYBY_INTERVAL);
+	const intervalSeconds = DEFAULT_FLYBY_INTERVAL;
 	const delay = randomBetween(intervalSeconds * 0.65, intervalSeconds * 1.35) * 1000;
 	flybyTimer = window.setTimeout(() => {
 		spawnFlyby();
