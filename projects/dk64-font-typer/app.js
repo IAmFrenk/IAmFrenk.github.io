@@ -2,7 +2,15 @@ const MAX_CHARACTERS = 50;
 const DEFAULT_TEXT = "GOLDEN BANANA";
 const DEFAULT_LETTER_SPACING = 1;
 const DEFAULT_SPACE_WIDTH = 4;
+const DEFAULT_FLYBY_INTERVAL = 6;
 const OUTPUT_SCALE = 4;
+const FLYBY_IMAGE_SOURCES = [
+	"flybys/Diddy_icon.png",
+	"flybys/Donkey_icon.png",
+	"flybys/Lanky_icon.png",
+	"flybys/Chunkey_icon.png",
+	"flybys/Tiny_icon.png",
+];
 
 const SYMBOL_NAME_MAP = {
 	".": "dot",
@@ -32,16 +40,20 @@ const form = document.querySelector("#typer-form");
 const textInput = document.querySelector("#text-input");
 const letterSpacingInput = document.querySelector("#letter-spacing-input");
 const spaceWidthInput = document.querySelector("#space-width-input");
+const flybyFrequencyInput = document.querySelector("#flyby-frequency-input");
 const characterCount = document.querySelector("#character-count");
 const warningMessage = document.querySelector("#warning-message");
 const previewCanvas = document.querySelector("#preview-canvas");
 const previewWrap = document.querySelector(".canvas-wrap");
 const downloadButton = document.querySelector("#download-button");
+const flybyLayer = document.querySelector("#flyby-layer");
 const context = previewCanvas.getContext("2d");
 const imageCache = new Map();
 
 let latestBlobUrl = "";
 let latestDownloadName = `${DEFAULT_TEXT}.png`;
+let flybyTimer = 0;
+let flybyImages = [];
 
 function setWarning(message) {
 	warningMessage.textContent = message;
@@ -56,6 +68,11 @@ function updateCharacterCount() {
 function readPixelInput(input, fallback) {
 	const value = Number.parseInt(input.value, 10);
 	return Number.isFinite(value) ? value : fallback;
+}
+
+function readNumberInput(input, fallback) {
+	const value = Number.parseFloat(input.value);
+	return Number.isFinite(value) && value > 0 ? value : fallback;
 }
 
 function sanitizeFileName(name) {
@@ -108,6 +125,117 @@ async function loadSymbol(character) {
 	}
 
 	return null;
+}
+
+function randomBetween(min, max) {
+	const lower = Math.min(min, max);
+	const upper = Math.max(min, max);
+	return lower + Math.random() * (upper - lower);
+}
+
+function randomInteger(max) {
+	return Math.floor(Math.random() * max);
+}
+
+function clamp(value, min, max) {
+	return Math.min(max, Math.max(min, value));
+}
+
+function pickRandomFlybyPath(imageWidth, imageHeight) {
+	const viewportWidth = window.innerWidth;
+	const viewportHeight = window.innerHeight;
+	const margin = Math.max(40, Math.round(Math.min(viewportWidth, viewportHeight) * 0.08));
+	const driftX = randomBetween(-Math.max(80, viewportWidth * 0.16), Math.max(80, viewportWidth * 0.16));
+	const driftY = randomBetween(-Math.max(80, viewportHeight * 0.16), Math.max(80, viewportHeight * 0.16));
+	const side = randomInteger(4);
+
+	if (side === 0) {
+		const startY = randomBetween(-margin, viewportHeight - imageHeight + margin);
+		return {
+			startX: -imageWidth - margin,
+			startY,
+			endX: viewportWidth + margin,
+			endY: clamp(startY + driftY, -margin, viewportHeight - imageHeight + margin),
+		};
+	}
+
+	if (side === 1) {
+		const startY = randomBetween(-margin, viewportHeight - imageHeight + margin);
+		return {
+			startX: viewportWidth + margin,
+			startY,
+			endX: -imageWidth - margin,
+			endY: clamp(startY + driftY, -margin, viewportHeight - imageHeight + margin),
+		};
+	}
+
+	if (side === 2) {
+		const startX = randomBetween(-margin, viewportWidth - imageWidth + margin);
+		return {
+			startX,
+			startY: -imageHeight - margin,
+			endX: clamp(startX + driftX, -margin, viewportWidth - imageWidth + margin),
+			endY: viewportHeight + margin,
+		};
+	}
+
+	const startX = randomBetween(-margin, viewportWidth - imageWidth + margin);
+	return {
+		startX,
+		startY: viewportHeight + margin,
+		endX: clamp(startX + driftX, -margin, viewportWidth - imageWidth + margin),
+		endY: -imageHeight - margin,
+	};
+}
+
+function scheduleNextFlyby() {
+	window.clearTimeout(flybyTimer);
+	const intervalSeconds = readNumberInput(flybyFrequencyInput, DEFAULT_FLYBY_INTERVAL);
+	const delay = randomBetween(intervalSeconds * 0.65, intervalSeconds * 1.35) * 1000;
+	flybyTimer = window.setTimeout(() => {
+		spawnFlyby();
+		scheduleNextFlyby();
+	}, delay);
+}
+
+function spawnFlyby() {
+	if (!flybyLayer || flybyImages.length === 0) {
+		return;
+	}
+
+	const sourceImage = flybyImages[randomInteger(flybyImages.length)];
+	if (!sourceImage) {
+		return;
+	}
+
+	const flyby = document.createElement("img");
+	flyby.className = "flyby";
+	flyby.src = sourceImage.src;
+	flyby.alt = "";
+	flyby.setAttribute("aria-hidden", "true");
+
+	const size = Math.round(randomBetween(54, 104));
+	const rotationStart = randomBetween(-45, 45);
+	const rotationEnd = rotationStart + randomBetween(-240, 240);
+	const path = pickRandomFlybyPath(size, size);
+	const distance = Math.hypot(path.endX - path.startX, path.endY - path.startY);
+	const speed = randomBetween(170, 260);
+	const duration = Math.max(4, distance / speed);
+
+	flyby.style.width = `${size}px`;
+	flyby.style.setProperty("--start-x", `${Math.round(path.startX)}px`);
+	flyby.style.setProperty("--start-y", `${Math.round(path.startY)}px`);
+	flyby.style.setProperty("--end-x", `${Math.round(path.endX)}px`);
+	flyby.style.setProperty("--end-y", `${Math.round(path.endY)}px`);
+	flyby.style.setProperty("--start-rotation", `${rotationStart}deg`);
+	flyby.style.setProperty("--end-rotation", `${rotationEnd}deg`);
+	flyby.style.animationDuration = `${duration}s`;
+
+	flyby.addEventListener("animationend", () => {
+		flyby.remove();
+	});
+
+	flybyLayer.appendChild(flyby);
 }
 
 function resetPreview() {
@@ -264,3 +392,11 @@ textInput.addEventListener("input", updateCharacterCount);
 form.addEventListener("submit", handleSubmit);
 downloadButton.addEventListener("click", handleDownload);
 updateCharacterCount();
+
+Promise.all(FLYBY_IMAGE_SOURCES.map((src) => loadImage(src))).then((images) => {
+	flybyImages = images.filter(Boolean);
+	if (flybyImages.length > 0) {
+		spawnFlyby();
+		scheduleNextFlyby();
+	}
+});

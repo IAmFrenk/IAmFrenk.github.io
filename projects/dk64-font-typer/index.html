@@ -9,6 +9,7 @@
 	<script src="app.js" defer></script>
 </head>
 <body>
+	<div class="flyby-layer" id="flyby-layer" aria-hidden="true"></div>
 	<main class="page-shell">
 		<nav class="breadcrumbs" aria-label="Breadcrumb">
 			<a href="../../">Frenkgoes</a>
@@ -55,6 +56,12 @@
 						<label for="space-width-input">Space width</label>
 						<input id="space-width-input" name="spaceWidth" type="number" inputmode="numeric" min="0" step="1" value="4" />
 					</div>
+				</div>
+
+				<div class="field-group">
+					<label for="flyby-frequency-input">Flyby interval</label>
+					<input id="flyby-frequency-input" name="flybyFrequency" type="number" min="0.5" step="0.5" value="6" />
+					<p class="field-note">Average seconds between new background images.</p>
 				</div>
 
 				<button class="button-primary" type="submit">Submit</button>
