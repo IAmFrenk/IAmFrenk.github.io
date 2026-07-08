@@ -1,14 +1,14 @@
 :root {
-    --page: #2a2a2a;
-    --surface: #1d211b;
-    --surface-soft: #282e25;
-    --line: rgba(229, 207, 143, 0.22);
-    --grid-line: rgba(229, 207, 143, 0.12);
-    --text: #f7efd6;
-    --muted: #d2c39a;
-    --accent: #d5ae58;
-    --accent-strong: #f0d88a;
-    --button-text: #171a15;
+    --page: #262626;
+    --surface: #1a1a1a;
+    --surface-soft: #232323;
+    --line: rgba(255, 255, 255, 0.16);
+    --grid-line: rgba(255, 255, 255, 0.08);
+    --text: #f0f0f0;
+    --muted: #b9b9b9;
+    --accent: #a7a7a7;
+    --accent-strong: #efefef;
+    --button-text: #111111;
     --shadow: 0 22px 70px rgba(9, 11, 8, 0.38);
 }
 
@@ -18,7 +18,7 @@
 
 body {
     background:
-        linear-gradient(180deg, rgba(24, 24, 24, 0.68), rgba(24, 24, 24, 0.32)),
+        linear-gradient(180deg, rgba(18, 18, 18, 0.72), rgba(18, 18, 18, 0.36)),
         var(--page);
     color: var(--text);
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
@@ -79,7 +79,7 @@ a {
 .calculator-panel,
 .table-panel {
     background:
-        linear-gradient(135deg, rgba(29, 33, 27, 0.96), rgba(40, 46, 37, 0.88)),
+        linear-gradient(135deg, rgba(28, 28, 28, 0.96), rgba(38, 38, 38, 0.88)),
         var(--surface);
     border: 1px solid var(--line);
     border-radius: 8px;
@@ -97,9 +97,9 @@ a {
 
 .class-emblems {
     background:
-        linear-gradient(135deg, rgba(213, 174, 88, 0.18), rgba(247, 239, 214, 0.08)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04)),
         var(--surface-soft);
-    border: 1px dashed rgba(240, 216, 138, 0.7);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     display: grid;
     gap: 12px;
@@ -168,8 +168,8 @@ label span {
 }
 
 input {
-    background: #141711;
-    border: 1px solid rgba(229, 207, 143, 0.28);
+    background: #161616;
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 8px;
     color: var(--text);
     font: inherit;
@@ -181,7 +181,7 @@ input {
 
 input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(213, 174, 88, 0.18);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
 }
 
 .button-primary {
@@ -237,20 +237,20 @@ tbody tr {
 }
 
 tbody td {
-    background: rgba(247, 239, 214, 0.08);
-    border-bottom: 1px solid rgba(229, 207, 143, 0.12);
-    border-top: 1px solid rgba(229, 207, 143, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 tbody td:first-child {
-    border-left: 1px solid rgba(229, 207, 143, 0.12);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px 0 0 8px;
 }
 
 tbody td:last-child {
-    background: rgba(213, 174, 88, 0.14);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 0 8px 8px 0;
-    border-right: 1px solid rgba(229, 207, 143, 0.12);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--accent-strong);
     font-weight: 800;
 }
@@ -263,7 +263,7 @@ tbody td:last-child {
 }
 
 .circle-img {
-    border: 3px solid rgba(247, 239, 214, 0.85);
+    border: 3px solid rgba(255, 255, 255, 0.55);
     border-radius: 999px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     height: 55px;

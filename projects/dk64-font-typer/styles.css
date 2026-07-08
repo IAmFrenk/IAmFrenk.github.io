@@ -120,15 +120,13 @@ a {
 
 .hero-panel {
 	align-items: center;
-	background:
-		linear-gradient(135deg, rgba(58, 36, 24, 0.96), rgba(75, 45, 28, 0.88)),
-		var(--surface);
-	border-radius: 8px;
-	box-shadow: var(--shadow);
+	background: transparent;
+	border: 0;
+	box-shadow: none;
 	display: grid;
 	justify-items: center;
-	margin-bottom: 24px;
-	padding: 18px 24px;
+	margin-bottom: 16px;
+	padding: 0;
 }
 
 .eyebrow {
@@ -155,7 +153,7 @@ h2 {
 .hero-logo {
 	display: block;
 	height: auto;
-	max-width: min(580px, 100%);
+	max-width: min(640px, 100%);
 	image-rendering: pixelated;
 	object-fit: contain;
 	width: 100%;
