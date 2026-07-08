@@ -1,5 +1,5 @@
 :root {
-    --page: #2f342b;
+    --page: #2a2a2a;
     --surface: #1d211b;
     --surface-soft: #282e25;
     --line: rgba(229, 207, 143, 0.22);
@@ -18,7 +18,7 @@
 
 body {
     background:
-        linear-gradient(180deg, rgba(23, 26, 21, 0.64), rgba(23, 26, 21, 0.28)),
+        linear-gradient(180deg, rgba(24, 24, 24, 0.68), rgba(24, 24, 24, 0.32)),
         var(--page);
     color: var(--text);
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
