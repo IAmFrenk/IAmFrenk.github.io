@@ -221,10 +221,10 @@ select:focus {
 
 #civilizations {
 	border-collapse: separate;
-	border-spacing: 3px;
+	border-spacing: 3.3px;
 	color: var(--text);
-	font-size: 12px;
-	min-width: 1080px;
+	font-size: 13px;
+	min-width: 1188px;
 	text-align: left;
 	width: 100%;
 }
@@ -235,8 +235,8 @@ select:focus {
 	border-radius: 8px;
 	cursor: pointer;
 	line-height: 1.2;
-	min-width: 108px;
-	padding: 5px 7px;
+	min-width: 119px;
+	padding: 6px 8px;
 	transition: border-color 160ms ease, transform 160ms ease;
 	vertical-align: middle;
 }
@@ -250,7 +250,7 @@ select:focus {
 	height: auto;
 	margin-right: 6px;
 	vertical-align: middle;
-	width: 26px;
+	width: 29px;
 }
 
 #nqonly {
