@@ -1,6 +1,8 @@
 const MAX_CHARACTERS = 50;
+const DEFAULT_TEXT = "GOLDEN BANANA";
 const DEFAULT_LETTER_SPACING = 1;
 const DEFAULT_SPACE_WIDTH = 4;
+const OUTPUT_SCALE = 4;
 
 const SYMBOL_NAME_MAP = {
 	".": "dot",
@@ -39,6 +41,7 @@ const context = previewCanvas.getContext("2d");
 const imageCache = new Map();
 
 let latestBlobUrl = "";
+let latestDownloadName = `${DEFAULT_TEXT}.png`;
 
 function setWarning(message) {
 	warningMessage.textContent = message;
@@ -52,7 +55,11 @@ function updateCharacterCount() {
 
 function readPixelInput(input, fallback) {
 	const value = Number.parseInt(input.value, 10);
-	return Number.isFinite(value) && value >= 0 ? value : fallback;
+	return Number.isFinite(value) ? value : fallback;
+}
+
+function sanitizeFileName(name) {
+	return name.replace(/[\\/:*?"<>|\u0000-\u001f]/g, "_");
 }
 
 function unique(values) {
@@ -65,12 +72,15 @@ function symbolCandidates(character) {
 	const namedCharacter = SYMBOL_NAME_MAP[character] || SYMBOL_NAME_MAP[upper];
 	const encodedCharacter = encodeURIComponent(character);
 
-	return unique([
+	const candidates = [
+		character === "_" && "symbols/underscore.png",
 		safeCharacter && `symbols/${safeCharacter}.png`,
 		namedCharacter && `symbols/${namedCharacter}.png`,
 		character && `symbols/${character}.png`,
 		encodedCharacter !== safeCharacter && `symbols/${encodedCharacter}.png`,
-	]);
+	];
+
+	return unique(candidates);
 }
 
 function loadImage(src) {
@@ -106,6 +116,7 @@ function resetPreview() {
 	previewCanvas.height = 1;
 	previewWrap.classList.remove("has-preview");
 	downloadButton.disabled = true;
+	latestDownloadName = `${DEFAULT_TEXT}.png`;
 
 	if (latestBlobUrl) {
 		URL.revokeObjectURL(latestBlobUrl);
@@ -113,82 +124,79 @@ function resetPreview() {
 	}
 }
 
-async function buildUnits(characters, spaceWidth) {
+async function buildLayout(characters, spaceWidth, letterSpacing) {
 	const units = [];
 	let skippedCharacters = 0;
+	let cursorX = 0;
+	let minX = 0;
+	let maxX = 0;
+	let height = 0;
+	let previousWasImage = false;
 
 	for (const character of characters) {
 		if (character === " ") {
 			units.push({ type: "space", width: spaceWidth });
+			cursorX += spaceWidth;
+			maxX = Math.max(maxX, cursorX);
+			previousWasImage = false;
 			continue;
 		}
 
 		const image = await loadSymbol(character);
 		if (image) {
-			units.push({ type: "image", image });
+			if (previousWasImage) {
+				cursorX += letterSpacing;
+			}
+
+			const startX = cursorX;
+			const endX = startX + image.naturalWidth;
+			units.push({ type: "image", image, x: startX });
+			minX = Math.min(minX, startX);
+			maxX = Math.max(maxX, endX);
+			height = Math.max(height, image.naturalHeight);
+			cursorX = endX;
+			previousWasImage = true;
 		} else {
 			skippedCharacters += 1;
 		}
 	}
 
-	return { units, skippedCharacters };
-}
-
-function measureUnits(units, letterSpacing) {
-	let width = 0;
-	let height = 0;
-	let previousWasImage = false;
-
-	for (const unit of units) {
-		if (unit.type === "space") {
-			width += unit.width;
-			previousWasImage = false;
-			continue;
-		}
-
-		if (previousWasImage) {
-			width += letterSpacing;
-		}
-
-		width += unit.image.naturalWidth;
-		height = Math.max(height, unit.image.naturalHeight);
-		previousWasImage = true;
-	}
-
 	return {
-		width: Math.max(1, width),
-		height: Math.max(1, height),
+		units,
+		skippedCharacters,
+		bounds: {
+			width: Math.max(1, maxX - minX),
+			height: Math.max(1, height),
+			minX,
+		},
 	};
 }
 
-function drawUnits(units, letterSpacing, size) {
-	previewCanvas.width = size.width;
-	previewCanvas.height = size.height;
-	context.clearRect(0, 0, size.width, size.height);
+function drawLayout(units, bounds) {
+	const width = Math.max(1, Math.ceil(bounds.width * OUTPUT_SCALE));
+	const height = Math.max(1, Math.ceil(bounds.height * OUTPUT_SCALE));
+	previewCanvas.width = width;
+	previewCanvas.height = height;
+	context.clearRect(0, 0, width, height);
 	context.imageSmoothingEnabled = false;
 
-	let x = 0;
-	let previousWasImage = false;
+	const offsetX = -bounds.minX * OUTPUT_SCALE;
 
 	for (const unit of units) {
 		if (unit.type === "space") {
-			x += unit.width;
-			previousWasImage = false;
 			continue;
 		}
 
-		if (previousWasImage) {
-			x += letterSpacing;
-		}
-
-		const y = Math.round((size.height - unit.image.naturalHeight) / 2);
-		context.drawImage(unit.image, x, y);
-		x += unit.image.naturalWidth;
-		previousWasImage = true;
+		const drawWidth = unit.image.naturalWidth * OUTPUT_SCALE;
+		const drawHeight = unit.image.naturalHeight * OUTPUT_SCALE;
+		const x = Math.round(unit.x * OUTPUT_SCALE + offsetX);
+		const y = Math.round((height - drawHeight) / 2);
+		context.drawImage(unit.image, x, y, drawWidth, drawHeight);
 	}
 }
 
-function enableDownload() {
+function enableDownload(downloadName) {
+	latestDownloadName = downloadName;
 	downloadButton.disabled = true;
 	previewCanvas.toBlob((blob) => {
 		if (!blob) {
@@ -211,7 +219,8 @@ async function handleSubmit(event) {
 	setWarning("");
 	resetPreview();
 
-	const characters = Array.from(textInput.value);
+	const renderText = textInput.value.length === 0 ? DEFAULT_TEXT : textInput.value;
+	const characters = Array.from(renderText);
 	if (characters.length <= 0) {
 		setWarning("Enter at least 1 character before submitting.");
 		return;
@@ -224,17 +233,16 @@ async function handleSubmit(event) {
 
 	const letterSpacing = readPixelInput(letterSpacingInput, DEFAULT_LETTER_SPACING);
 	const spaceWidth = readPixelInput(spaceWidthInput, DEFAULT_SPACE_WIDTH);
-	const { units, skippedCharacters } = await buildUnits(characters, spaceWidth);
+	const { units, skippedCharacters, bounds } = await buildLayout(characters, spaceWidth, letterSpacing);
 
 	if (units.length === 0) {
 		setWarning("No matching PNGs were found for that text.");
 		return;
 	}
 
-	const size = measureUnits(units, letterSpacing);
-	drawUnits(units, letterSpacing, size);
+	drawLayout(units, bounds);
 	previewWrap.classList.add("has-preview");
-	enableDownload();
+	enableDownload(`${sanitizeFileName(renderText)}.png`);
 
 	if (skippedCharacters > 0) {
 		setWarning(`${skippedCharacters} character${skippedCharacters === 1 ? "" : "s"} skipped because no matching PNG was found.`);
@@ -248,7 +256,7 @@ function handleDownload() {
 
 	const link = document.createElement("a");
 	link.href = latestBlobUrl;
-	link.download = "dk64-font-typer.png";
+	link.download = latestDownloadName;
 	link.click();
 }
 
