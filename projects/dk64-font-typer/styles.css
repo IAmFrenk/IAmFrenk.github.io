@@ -131,9 +131,12 @@ a {
 
 .credit-note {
 	color: var(--muted);
-	font-size: 13px;
-	margin: 10px 0 0;
-	text-align: center;
+	font-size: 12px;
+	grid-column: 2;
+	justify-self: end;
+	margin: -4px 0 0;
+	opacity: 0.85;
+	text-align: right;
 }
 
 .eyebrow {
@@ -387,6 +390,12 @@ canvas {
 
 	.allowed-characters ul {
 		grid-template-columns: 1fr;
+	}
+
+	.credit-note {
+		grid-column: auto;
+		justify-self: start;
+		margin-top: 0;
 	}
 
 	.flyby {
