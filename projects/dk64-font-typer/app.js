@@ -9,7 +9,7 @@ const FLYBY_IMAGE_SOURCES = [
 	"flybys/Diddy_icon.png",
 	"flybys/Donkey_icon.png",
 	"flybys/Lanky_icon.png",
-	"flybys/Chunkey_icon.png",
+	"flybys/Chunky_icon.png",
 	"flybys/Tiny_icon.png",
 ];
 
