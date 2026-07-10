@@ -129,6 +129,13 @@ a {
 	padding: 0;
 }
 
+.credit-note {
+	color: var(--muted);
+	font-size: 13px;
+	margin: 10px 0 0;
+	text-align: center;
+}
+
 .eyebrow {
 	color: var(--accent);
 	font-size: 13px;
